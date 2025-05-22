@@ -35,7 +35,7 @@ export const login = async (req, res) => {
     if (!user) {
       return res
         .status(404)
-        .json({ success: false, message: "Invalid Credentials" });
+        .json({ success: false, message: "User not register" });
     }
 
     const ispasswordValid = await bcryptjs.compare(password, user.password);
@@ -64,9 +64,11 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     res.clearCookie("token");
-    res.status(200).json({ success: true, message: "User Logout Successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "User Logout Successfully" });
   } catch (error) {
-    res.status(500).json({success:false,message:"Internal Server error"})
-    console.log(error)
+    res.status(500).json({ success: false, message: "Internal Server error" });
+    console.log(error);
   }
 };
