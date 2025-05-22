@@ -1,8 +1,32 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { user_login } from "../RTK/Slices/authSlice.js";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { successMessage, errorMessage, loader } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      navigate("/dashboard");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+      navigate("/home");
+    }
+  }, [successMessage, errorMessage, dispatch, navigate]);
+
   // Formik setup with Yup validation
   const formik = useFormik({
     initialValues: {
@@ -14,13 +38,19 @@ const Login = () => {
         .email("Invalid email address")
         .required("Email is required"),
       password: Yup.string()
-        .min(8, "Password must be at least 8 characters")
+        .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      // Handle login logic here
-      console.log("Login submitted:", values);
-      // You would typically call an API here
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const result = await dispatch(user_login(values));
+        if (user_login.fulfilled.match(result)) {
+        }
+      } catch (error) {
+        toast.error("Login failed. Please try again");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -119,7 +149,7 @@ const Login = () => {
             </div>
           </div> */}
           <div>
-            <Link to={'/register'}>
+            <Link to={"/register"}>
               <p className="flex justify-end text-blue-500 font-semibold cursor-pointer">
                 Register here
               </p>
