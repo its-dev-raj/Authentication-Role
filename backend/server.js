@@ -6,7 +6,7 @@ import cookieparser from "cookie-parser";
 import AdminRoutes from "./routes/AdminRoutes.js";
 import { connectDb } from "./utlis/db.js";
 
-dotenv.config({ path: "./src/.env" });
+dotenv.config();
 const app = express();
 connectDb();
 app.use(cookieparser());
@@ -25,4 +25,4 @@ app.get("/", (req, res) => {
   res.send("test");
 });
 
-app.listen(4000, () => console.log("port is running on 4k"));
+app.listen(4000, () => console.log(`Server is running on port ${process.env.PORT}`));
