@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { messageClear, user_login } from "../RTK/Slices/authSlice.js";
+import { messageClear, SetUser, user_login } from "../RTK/Slices/authSlice.js";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
@@ -17,7 +17,7 @@ const Login = () => {
   useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
-      dispatch(messageClear());
+      dispatch(SetUser(Response.user), messageClear());
       navigate("/dashboard");
     }
     if (errorMessage) {
