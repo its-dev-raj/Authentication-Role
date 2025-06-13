@@ -5,17 +5,14 @@ import "./index.css";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { persistor, store } from "./RTK/store/store.js";
-import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./RTK/store/store.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <ToastContainer />
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
+        <App />
       </Provider>
     </BrowserRouter>
   </StrictMode>

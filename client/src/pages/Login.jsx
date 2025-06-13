@@ -16,6 +16,13 @@ const Login = () => {
 
   useEffect(() => {
     if (successMessage) {
+      // if (Response.user.role == "admin") {
+      //   navigate("/admin");
+      // }
+      // else if(Response.user.role =='user'){
+      //   navigate('/dashboard')
+      // }
+
       toast.success(successMessage);
       dispatch(SetUser(Response.user), messageClear());
       navigate("/dashboard");

@@ -7,7 +7,7 @@ const Admin = () => {
       try {
         const request = await api.get("/admin/getuser");
         const response = request.data;
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.log(error);
       }
