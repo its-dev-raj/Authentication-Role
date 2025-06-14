@@ -18,10 +18,10 @@ const App = () => {
         <Route path="/admin" element={<AdminLayouts />}>
           <Route index element={<Admin />} />
         </Route>
-        <Route path="/">
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* <Route path="/">
+        </Route> */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>

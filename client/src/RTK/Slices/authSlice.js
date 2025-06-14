@@ -51,11 +51,11 @@ export const authReducer = createSlice({
       state.errorMessage = "";
       state.successMessage = "";
     },
-    user_reset: (state) => {
-      state.userInfo = null;
-    },
-    SetUser:(state,action)=>{
-      state.userInfo=action.payload
+    // user_reset: (state) => {
+    //   state.userInfo = null;
+    // },
+    SetUser: (state, action) => {
+      state.userInfo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -99,5 +99,5 @@ export const authReducer = createSlice({
   },
 });
 
-export const { messageClear, user_reset, SetUser } = authReducer.actions;
+export const { messageClear, SetUser } = authReducer.actions;
 export default authReducer.reducer;
